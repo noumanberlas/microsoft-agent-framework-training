@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Lesson01.HelloWorldAgent/Lesson01.HelloWorldAgent.csproj" />
+  </Folder>
+</Solution>

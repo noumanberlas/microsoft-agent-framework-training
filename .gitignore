@@ -1,0 +1,13 @@
+# .NET
+dotnet/**/bin/
+dotnet/**/obj/
+*.user
+
+# Python
+python/.venv/
+python/**/__pycache__/
+python/**/*.pyc
+
+# Secrets
+.env
+**/.env
