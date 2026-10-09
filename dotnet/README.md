@@ -4,7 +4,9 @@
 
 ```bash
 dotnet restore
-setx OPENAI_API_KEY "sk-..."   # or set it in your shell session
+setx FOUNDRY_PROJECT_ENDPOINT "https://<resource>.services.ai.azure.com/api/projects/<project>"
+setx FOUNDRY_API_KEY "<foundry-api-key>"
+setx FOUNDRY_MODEL "gpt-4o"
 ```
 
 ## Run a lesson
@@ -20,6 +22,7 @@ dotnet run --project src/Lesson01.HelloWorldAgent
 Package: `Microsoft.Agents.AI.OpenAI` (verified against `1.19.0`, prerelease).
 
 Demonstrates:
+- Connecting `OpenAIClient` to a Microsoft Foundry project endpoint
 - Wrapping an `OpenAI.Chat.ChatClient` as an `AIAgent` via `.AsAIAgent(instructions:, name:)`
 - Non-streaming run: `await agent.RunAsync(message)`
 - Streaming run: `await foreach (var update in agent.RunStreamingAsync(message))`

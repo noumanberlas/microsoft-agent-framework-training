@@ -1,24 +1,36 @@
 """Lesson 01 - Your first Microsoft Agent Framework agent (Python).
-
-Setup:
-    1. pip install -r requirements.txt   (uses --pre, since Agent Framework is in public preview)
-    2. Set an OPENAI_API_KEY environment variable with your OpenAI API key.
+   (uses --pre, since Agent Framework is in public preview)
+    2. Set FOUNDRY_PROJECT_ENDPOINT, FOUNDRY_API_KEY, and FOUNDRY_MODEL environment variables.
     3. python lessons/lesson01_hello_world_agent.py
 """
 
 import asyncio
 import os
+from pathlib import Path
 
 from agent_framework.openai import OpenAIChatClient
+from dotenv import load_dotenv
+
+# Load vars from the root .env (one level above python/), then any local python/.env.
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+load_dotenv()
 
 
 async def main() -> None:
-    model_id = os.environ.get("OPENAI_MODEL_ID", "gpt-4o-mini")
-    if not os.environ.get("OPENAI_API_KEY"):
-        raise RuntimeError("Set the OPENAI_API_KEY environment variable before running this sample.")
+    project_endpoint = os.environ.get("FOUNDRY_PROJECT_ENDPOINT")
+    api_key = os.environ.get("FOUNDRY_API_KEY")
+    model_id = os.environ.get("FOUNDRY_MODEL")
+    if not project_endpoint or not api_key or not model_id:
+        raise RuntimeError(
+            "Set FOUNDRY_PROJECT_ENDPOINT, FOUNDRY_API_KEY, and FOUNDRY_MODEL before running this sample."
+        )
 
     # An Agent = a chat client + instructions (+ optional tools, added in later lessons).
-    agent = OpenAIChatClient(model=model_id).as_agent(
+    agent = OpenAIChatClient(
+        model=model_id,
+        api_key=api_key,
+        base_url=f"{project_endpoint.rstrip('/')}/openai/v1/",
+    ).as_agent(
         name="Assistant",
         instructions="You are a helpful assistant.",
     )

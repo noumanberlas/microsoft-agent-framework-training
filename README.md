@@ -28,7 +28,7 @@ More lessons (threads, function tools, structured output, agent backends, multi-
 
 ## Prerequisites
 
-- An OpenAI API key (`OPENAI_API_KEY` environment variable) — used for the simplest possible "hello world" backend. Later lessons also cover Azure OpenAI and Microsoft Foundry (`AIProjectClient`) as alternative backends.
+- Microsoft Foundry project credentials: `FOUNDRY_PROJECT_ENDPOINT`, `FOUNDRY_API_KEY`, and `FOUNDRY_MODEL`.
 - .NET 8+ SDK
 - Python 3.10+
 
